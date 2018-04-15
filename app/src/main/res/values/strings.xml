@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RESTandroidClient</string>
     <string name="action_settings">Settings</string>
-    <string name="web_service_url">http://192.168.2.10:8080/FishStick-war/webresources/entity.fishStick/</string>
+    <string name="web_service_url">http://192.168.2.10:8080/FishStick-war/webresources/entity.fishstick/</string>
     <string name="invalid_url">Invalid URL</string>
     <string name="fishStick_id">ID: %s</string>
     <string name="fishStick_uuid">UUID: %s</string>
