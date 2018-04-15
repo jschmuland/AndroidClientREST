@@ -15,19 +15,31 @@
         android:useDefaultMargins="true">
 
         <TextView
-            android:id="@+id/stuffIDTextView"
+            android:id="@+id/fishStickIDTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/stuffTextView"
+            android:id="@+id/fishStickUUIDTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/moreStuffTextView"
+            android:id="@+id/fishStickLambdaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/fishStickOmegaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/fishStickRecordNumberTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />

@@ -8,8 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -28,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private List<Stuff> stuffList = new ArrayList<>();
-    private StuffArrayAdapter stuffArrayAdapter;
-    private ListView stuffListView;
+    private List<FishStick> fishStickList = new ArrayList<>();
+    private StuffArrayAdapter fishStickArrayAdapter;
+    private ListView fishStickListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +38,21 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //create ArrayAdapter to bind stuffList to the stuffListView
-        stuffListView = (ListView) findViewById(R.id.stuffListView);
-        stuffArrayAdapter = new StuffArrayAdapter(this, stuffList);
-        stuffListView.setAdapter(stuffArrayAdapter);
+        fishStickListView = (ListView) findViewById(R.id.fishStickListView);
+        fishStickArrayAdapter = new StuffArrayAdapter(this, fishStickList);
+        fishStickListView.setAdapter(fishStickArrayAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText locationStuffIdText = (EditText) findViewById(R.id.stuffIDEditText);
-                URL url = createURL(locationStuffIdText.getText().toString());
+                EditText locationFishStickIdText = (EditText) findViewById(R.id.fishStickIDEditText);
+                URL url = createURL(locationFishStickIdText.getText().toString());
 
                 if (url != null){
-                    dismissKeyboard(locationStuffIdText);
-                    GetStuffTask getStuffTask = new GetStuffTask();
-                    getStuffTask.execute(url);
+                    dismissKeyboard(locationFishStickIdText);
+                    GetFishStickTask getFishStickTask = new GetFishStickTask();
+                    getFishStickTask.execute(url);
                 } else {
                     Snackbar.make(findViewById(R.id.coordinatorLayout),
                             R.string.connect_error, Snackbar.LENGTH_LONG).show();
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //makes the REST web service call to get stuff data and saves the data to a local HTML file
-    private class GetStuffTask extends AsyncTask<URL,Void,JSONArray>{
+    private class GetFishStickTask extends AsyncTask<URL,Void,JSONArray>{
 
         @Override
         protected JSONArray doInBackground(URL... params){
@@ -145,24 +143,26 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONArray stuffs){
             convertJSONtoArrayList(stuffs); //repopulate stuffList
-            stuffArrayAdapter.notifyDataSetChanged();// rebind to ListView
-            stuffListView.smoothScrollToPosition(0);//scroll to top
+            fishStickArrayAdapter.notifyDataSetChanged();// rebind to ListView
+            fishStickListView.smoothScrollToPosition(0);//scroll to top
         }
 
         //create Stuff object from JSONArrya containing the stuff records
         private void convertJSONtoArrayList(JSONArray list){
-            stuffList.clear();//clear old stuff data
+            fishStickList.clear();//clear old stuff data
 
             try{
                 //convert each element of list to a stuff object
                 for(int i = 0;i<list.length(); ++i){
-                    JSONObject stuff = list.getJSONObject(i);//get one
+                    JSONObject fishStick = list.getJSONObject(i);//get one
 
                     // add new Stuff object to stuffList
-                    stuffList.add(new Stuff(
-                            stuff.getString("id"),
-                            stuff.getString("stuff"),
-                            stuff.getString("moreStuff")));
+                    fishStickList.add(new FishStick(
+                            fishStick.getString("id"),
+                            fishStick.getString("UUID"),
+                            fishStick.getString("lambda"),
+                            fishStick.getString("omega"),
+                            fishStick.getString("recordNumber")));
                 }
             }catch (JSONException e){
                 e.printStackTrace();

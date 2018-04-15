@@ -9,16 +9,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class StuffArrayAdapter extends ArrayAdapter<Stuff> {
+public class StuffArrayAdapter extends ArrayAdapter<FishStick> {
 
     private static class ViewHolder{
-        TextView stuffIDTextView;
-        TextView stuffTextView;
-        TextView moreStuffTextView;
+        TextView fishStickIDTextView;
+        TextView fishStickUUIDTextView;
+        TextView fishStickLambdaTextView;
+        TextView fishStickOmegaTextView;
+        TextView fishStickRecordNumber;
     }
 
     //constructor to initialize superclass inherated members
-    public StuffArrayAdapter(Context context, List<Stuff> stuffs){
+    public StuffArrayAdapter(Context context, List<FishStick> stuffs){
         super(context, -1,stuffs);
     }
 
@@ -27,7 +29,7 @@ public class StuffArrayAdapter extends ArrayAdapter<Stuff> {
     public View getView(int position, View convertView, ViewGroup parent){
         try {
             // get Stuff object for this specified ListView position
-            Stuff stuffItem = getItem(position);
+            FishStick fishStickItem = getItem(position);
             ViewHolder viewHolder;  // object that reference's list item's views
 
             // check for reusable ViewHolder from a ListView item that scrolled
@@ -38,25 +40,39 @@ public class StuffArrayAdapter extends ArrayAdapter<Stuff> {
                 LayoutInflater inflater = LayoutInflater.from(getContext());
                 convertView =
                         inflater.inflate(R.layout.list_item, parent, false);
-                viewHolder.stuffIDTextView =
-                        (TextView) convertView.findViewById(R.id.stuffIDTextView);
-                viewHolder.stuffTextView =
-                        (TextView) convertView.findViewById(R.id.stuffTextView);
-                viewHolder.moreStuffTextView =
-                        (TextView) convertView.findViewById(R.id.moreStuffTextView);
+
+                viewHolder.fishStickIDTextView =
+                        (TextView) convertView.findViewById(R.id.fishStickIDTextView);
+
+                viewHolder.fishStickUUIDTextView =
+                        (TextView) convertView.findViewById(R.id.fishStickUUIDTextView);
+
+                viewHolder.fishStickLambdaTextView =
+                        (TextView) convertView.findViewById(R.id.fishStickLambdaTextView);
+
+                viewHolder.fishStickOmegaTextView =
+                        (TextView) convertView.findViewById(R.id.fishStickOmegaTextView);
+
+                viewHolder.fishStickRecordNumber =
+                        (TextView) convertView.findViewById(R.id.fishStickRecordNumberTextView);
+
                 convertView.setTag(viewHolder);
 
             } else {//reuse existing ViewHolder stored as the lis items tag
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            // get other data from Stuff object and plage into views
+            // get other data from Stuff object and place into views
             Context context = getContext();//for loading String resources
-            viewHolder.stuffIDTextView.setText(context.getString(R.string.demoStuff_id, stuffItem.id));
+            viewHolder.fishStickIDTextView.setText(context.getString(R.string.fishStick_id, fishStickItem.id));
 
-            viewHolder.stuffTextView.setText(context.getString(R.string.demoStuff_stuff, stuffItem.stuff));
+            viewHolder.fishStickUUIDTextView.setText(context.getString(R.string.fishStick_uuid, fishStickItem.uuid));
 
-            viewHolder.moreStuffTextView.setText(context.getString(R.string.demoStuff_moreStuff, stuffItem.moreStuff));
+            viewHolder.fishStickLambdaTextView.setText(context.getString(R.string.fishStick_lambda, fishStickItem.lambda));
+
+            viewHolder.fishStickOmegaTextView.setText(context.getString(R.string.fishStick_omega, fishStickItem.omega));
+
+            viewHolder.fishStickRecordNumber.setText(context.getString(R.string.fishStick_recordNumber, fishStickItem.recordNumber));
 
         }catch (Exception e){
             System.out.println(e.getMessage());
